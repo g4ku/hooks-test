@@ -1,8 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import { ChildComponent } from "./ChildComponent";
 
 const App: React.FC = () => {
+  const [count, setCount] = useState(0);
+  const handleClick = () => setCount(count + 1);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,9 +22,17 @@ const App: React.FC = () => {
         >
           Learn React
         </a>
+        <div id="count-disp">count: {count}</div>
+        <ChildComponent
+          handleMount={() => console.log("Parent: mount")}
+          handleUnmount={() => console.log("Parent: unmount")}
+          handleUpdate={handleClick}
+          handleUpdated={() => console.log("Parent: updated")}
+          count={count}
+        />
       </header>
     </div>
   );
-}
+};
 
 export default App;
